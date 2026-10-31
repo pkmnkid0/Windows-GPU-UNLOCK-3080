@@ -19,7 +19,7 @@ they do not contain a separate unlock implementation for each motherboard.
 
 | Family | Exact chip revision | Currently admitted card/layout combinations |
 |---|---|---|
-| GA102 | `0xb72000a1` | RTX 3090 / 3090 Ti; `0x6000` or `0x5ff4` MiB, still pinned exactly per machine |
+| GA102 | `0xb72000a1` | RTX 3090 / 3090 Ti at `0x6000` or `0x5ff4` MiB; RTX 3080 10GB `10de:2206` / `10de:2216` at exactly `0x2800` MiB; still pinned exactly per machine |
 | GA104 | `0xb74000a1` | `10de:2482` / `10de:2484` with `0x2000` MiB; `10de:2487` with `0x3000` MiB |
 | GA106 | `0xb76000a1` | `10de:2504` with `0x3000` MiB |
 
@@ -47,9 +47,14 @@ GA104 `248710de` and GA106 `250410de` tuples. These require the reviewed nvgop
 `60010` code. RTX 3070 `248410de` / 8 GiB uses `60009`, based on
 [issue #113](https://github.com/impacifist/Windows-GPU-UNLOCK/issues/113).
 GA104 requires PCI-specific driver pins; a chip-level match cannot substitute for them.
-The existing GA102 combinations remain available. Recognized aggregate and
-non-aggregate LOCAL topologies require all 21 host jobs, including input policy
-and the topology-specific complete driver-release replay. Generated profiles are experimental candidates, not
+The existing GA102 combinations remain available. RTX 3080 10GB adds
+`220610de` / `221610de` with exactly `0x2800` MiB. The recorded 3080 build uses
+nvgop `6000a` ([PR #72](https://github.com/impacifist/Windows-GPU-UNLOCK/pull/72));
+the 3090 / 3090 Ti sizes are not accepted on a 3080 and `0x2800` is not accepted
+on a 3090 / 3090 Ti. No fixed 3080 machine profile is added; generation still
+requires your own two captures and all 21 host jobs for recognized aggregate and
+non-aggregate LOCAL topologies, including input policy and the topology-specific
+complete driver-release replay. Generated profiles are experimental candidates, not
 new physical compatibility reports.
 
 The identity-only H610M probe still has no chip, VRAM or PROM pins and cannot

@@ -5,6 +5,11 @@
 Experimental UEFI GPU unlock and direct Windows handoff, expanded through
 community contributions.
 
+> **Fork note.** This is a fork of
+> [impacifist/Windows-GPU-UNLOCK](https://github.com/impacifist/Windows-GPU-UNLOCK)
+> that adds source-level RTX 3080 10GB admission to the LOCAL workflow. It is
+> not an upstream release; see [RTX 3080 notes](docs/RTX3080-10GB.en.md).
+
 [![Join our Discord community](https://img.shields.io/badge/Join%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/WjKsjEqxF)
 [![View compatibility and supported configurations](https://img.shields.io/badge/Compatibility-455A64?style=for-the-badge)](docs/COMPATIBILITY.en.md)
 [![Contribute research and improvements](https://img.shields.io/badge/Contribute-37474F?style=for-the-badge&logo=github&logoColor=white)](docs/CONTRIBUTING.en.md)
@@ -28,7 +33,7 @@ GPU model.** Check the linked motherboard, BIOS and card requirements before bui
 | **RTX 3060 12GB (GA104 / GA106)** | Hardware success reported; headless USB only | [GA104](docs/COMPATIBILITY.en.md#profile-4-asus-prime-b660-plus-d4--rtx-3060-12gb-headless-usb) · [GA106](docs/COMPATIBILITY.en.md#profile-5-gigabyte-h610m-h--rtx-3060-12gb-ga106-headless-usb) |
 | **RTX 3070 8GB (2484 / GA104)** | Contributor LOCAL USB success reported; experimental automatic profile | [Exact conditions](docs/COMPATIBILITY.en.md#reported-local-profile-success) |
 | **RTX 3070 Ti 8GB** | Hardware success reported; internal headless | [Supported configuration](docs/COMPATIBILITY.en.md#profile-2-asus-tuf-b660m-e-d4--rtx-3070-ti-aggregate-console) |
-| **RTX 3080** | No dedicated profile; Windows display-routing research available | [Research observations](research/rtx3080/README.md) · [Project origins](THIRD_PARTY_NOTICES.md) |
+| **RTX 3080 10GB (GA102)** | Source-level LOCAL admission; no fixed profile or maintainer hardware run in this tree | [RTX 3080 notes](docs/RTX3080-10GB.en.md) · [Research observations](research/rtx3080/README.md) |
 | **RTX 3090 FE 24GB** | Hardware success recorded; internal headless; default profile | [Supported configuration](docs/COMPATIBILITY.en.md#profile-1-asus-tuf-b650m--rtx-3090-fe-original) |
 | **RTX 3090 Ti 24GB** | Hardware success reported; route depends on exact system | [X870 USB](docs/COMPATIBILITY.en.md#profile-3-gigabyte-x870-aorus-elite-wifi7--rtx-3090-ti-headless-usb) · [B660M internal](docs/COMPATIBILITY.en.md#profile-6-asus-tuf-b660m-e-d4--colorful-rtx-3090-ti-internal) |
 

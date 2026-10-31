@@ -209,6 +209,32 @@ host jobs must pass. GA104 RTX 3060 `2487` / `3000` MiB remains bound to `60010`
 No new named motherboard profile is added; use the [local-profile workflow](NEW-MACHINE.en.md).
 Other 3070 PCI IDs, VBIOS/driver combinations and console layouts need separate validation.
 
+## RTX 3080 10GB local-profile admission
+
+This source tree admits the RTX 3080 10GB to the generated LOCAL workflow:
+`10de:2206` or `10de:2216`, GA102 chip revision `0xb72000a1`, class/revision
+`030000a1`, and exactly `0x2800` MiB. The 3090 / 3090 Ti sizes `0x6000` /
+`0x5ff4` are not accepted on a 3080, `0x2800` is not accepted on a 3090 /
+3090 Ti, and 12GB 3080 or other GA102 variants are not admitted. This is
+source-level admission, not a named profile: no 3080 constants are committed
+and no maintainer has run a 3080 build from this tree.
+
+Two public records describe RTX 3080 10GB transactions. The project-origin
+[MSI 3080 report](https://github.com/rough2515-hub/rtx3080-unlock-public/blob/a08254d269af30ace9e57237abd3d8e6c261e8f5/evidence/unlock-boot-09/REPORT.TXT)
+records `220610de` / `1462:3890`, chip `b72000a1`, `0x2800` MiB, nvgop `6000a`,
+SS0 `0x88888888`, SS1 `0x8`, FLR and clean containment. [PR #72](https://github.com/impacifist/Windows-GPU-UNLOCK/pull/72)
+reports one cold boot on a Maxsun B760M / RTX 3080 LHR (`221610de`, subsystem
+`7377:2000`) and supplies the nvgop `6000a` `.text` hash now in `proven.json`.
+Its fixed `b760m-3080lhr` profile and B760M aggregate-console allowances are not
+part of this tree. Neither record is a current-source 3080 run, and one boot is
+not long-term or repeatability evidence.
+
+A 3080 capture still needs your exact subsystem, PROM, PCI segment/bus, root and
+display paths, driver hashes and console ownership graph. If the generator
+refuses the nvgop hash or ownership model, do not widen `proven.json` or edit the
+generated header; collect the full capture and report it. See the
+[RTX 3080 notes](RTX3080-10GB.en.md) and the [local-profile workflow](NEW-MACHINE.en.md).
+
 ## Scope beyond the recorded configurations
 
 | Other configuration | Status |

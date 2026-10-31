@@ -33,8 +33,13 @@
 #if GU_GPU_FAMILY == GU_GPU_FAMILY_GA102
 #define GU_GPU_FAMILY_NAME "GA102"
 #define GU_FAMILY_CHIP_ID 0xb72000a1U
-/* Preserve the current LOCAL envelope's two-ID/two-size combinations. */
-#if (GU_BOARD_ID != 0x220410deU && GU_BOARD_ID != 0x220310deU) || (GU_DEVICE_MEMORY_SIZE != 0x6000U && GU_DEVICE_MEMORY_SIZE != 0x5ff4U)
+/* Preserve the current LOCAL envelope's reviewed combinations. The RTX 3080
+ * 10 GiB adds 10de:2206/2216 at exactly 0x2800 MiB; it does not share the
+ * 3090/3090 Ti sizes and those cards do not share 0x2800. */
+#if !(((GU_BOARD_ID == 0x220410deU || GU_BOARD_ID == 0x220310deU) && \
+       (GU_DEVICE_MEMORY_SIZE == 0x6000U || GU_DEVICE_MEMORY_SIZE == 0x5ff4U)) || \
+      ((GU_BOARD_ID == 0x220610deU || GU_BOARD_ID == 0x221610deU) && \
+       GU_DEVICE_MEMORY_SIZE == 0x2800U))
 #error Card identity or memory is outside the reviewed GA102 family combinations
 #endif
 #elif GU_GPU_FAMILY == GU_GPU_FAMILY_GA104

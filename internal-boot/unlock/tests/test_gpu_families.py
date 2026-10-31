@@ -37,6 +37,10 @@ class FamilyTests(unittest.TestCase):
 
     def test_wrong_family_identity_memory_or_revision_is_refused(self):
         cases = [(102, 0x221610de, 0x6000, 0xb72000a1),
+                 (102, 0x220610de, 0x6000, 0xb72000a1),
+                 (102, 0x220610de, 0x5ff4, 0xb72000a1),
+                 (102, 0x220610de, 0x2800, 0xb72000a2),
+                 (102, 0x220410de, 0x2800, 0xb72000a1),
                  (102, 0x220410de, 0x3000, 0xb72000a1),
                  (102, 0x220410de, 0x6000, 0xb72000a2),
                  (104, 0x248210de, 0x3000, 0xb74000a1),
@@ -58,6 +62,17 @@ class FamilyTests(unittest.TestCase):
             ['-DGU_PROFILE_LOCAL','-DGU_BOARD_ID=0x248410deU','-DGU_DEVICE_MEMORY_SIZE=0x2000U','-DGU_CHIP_ID=0xb74000a1U'])
         self.assertEqual(done.returncode,0,done.stderr)
 
+    def test_rtx3080_10gb_uses_the_shared_ga102_implementation(self):
+        for board in (0x220610de, 0x221610de):
+            with self.subTest(board=board):
+                done=compile_source('#include "gpu-family.h"\n'
+                    '_Static_assert(GU_GPU_FAMILY == 102, "GA102");\n'
+                    '_Static_assert(GU_DEVICE_MEMORY_SIZE == 0x2800, "10 GiB");\n'
+                    '_Static_assert(GU_CHIP_ID == 0xb72000a1, "exact revision");\n',
+                    ['-DGU_PROFILE_LOCAL',f'-DGU_BOARD_ID={board}U',
+                     '-DGU_DEVICE_MEMORY_SIZE=0x2800U','-DGU_CHIP_ID=0xb72000a1U'])
+                self.assertEqual(done.returncode,0,done.stderr)
+
     def test_profile_family_and_firmware_cannot_be_overridden(self):
         for define in ('GU_GPU_FAMILY=104', 'GU_FIRMWARE_PROFILE=2', 'GU_GPU_FAMILY_GA102=104',
                        'GU_FIRMWARE_AMI_B650M_3057=2'):
@@ -66,7 +81,10 @@ class FamilyTests(unittest.TestCase):
                 self.assertNotEqual(done.returncode, 0)
 
     def test_legacy_local_headers_keep_all_admitted_ga102_combinations(self):
-        for board, memory, no_edid in itertools.product((0x220410de, 0x220310de), (0x6000, 0x5ff4), (0, 1)):
+        combinations = itertools.chain(
+            itertools.product((0x220410de, 0x220310de), (0x6000, 0x5ff4), (0, 1)),
+            itertools.product((0x220610de, 0x221610de), (0x2800,), (0, 1)))
+        for board, memory, no_edid in combinations:
             with self.subTest(board=board, memory=memory, no_edid=no_edid), tempfile.TemporaryDirectory() as directory:
                 folder = Path(directory)
                 local = folder / 'profile-local.h'

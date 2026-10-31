@@ -26,7 +26,8 @@ BOOLEAN GuDecodeSnapshotValid(const GU_DS_SNAPSHOT *s) {
      !g->Config[11] || g->Config[11]==0xffffffffU || g->Supported==~0ULL || !(g->Supported&GU_DS_IO) ||
      (g->Attributes!=GU_DS_MEMORY && g->Attributes!=(GU_DS_IO|GU_DS_MEMORY)))return FALSE;
   switch(g->Config[0]) {
-    case 0x220410deU:case 0x220310deU:case 0x248410deU:case 0x248710deU:case 0x250410deU:break;
+    case 0x220410deU:case 0x220310deU:case 0x220610deU:case 0x221610deU:
+    case 0x248410deU:case 0x248710deU:case 0x250410deU:break;
     default:return FALSE;
   }
   for(UINTN i=0;i<s->ParentCount;i++) {

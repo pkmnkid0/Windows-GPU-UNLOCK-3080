@@ -197,6 +197,32 @@ nvgop `60009`의 기존 검증 코드 해시 조합을 허용합니다. subsyste
 새 장비별 고정 프로필은 추가하지 않았으며 [로컬 프로필 절차](NEW-MACHINE.en.md)를 사용합니다.
 다른 3070 PCI ID, VBIOS·드라이버 조합과 콘솔 구성은 별도 검증이 필요합니다.
 
+## RTX 3080 10GB 로컬 프로필 허용
+
+현재 소스트리는 RTX 3080 10GB를 자동 LOCAL 경로에 허용합니다: `10de:2206` 또는
+`10de:2216`, GA102 칩 revision `0xb72000a1`, class/revision `030000a1`,
+정확히 `0x2800` MiB. 3090·3090 Ti의 `0x6000`·`0x5ff4`는 3080에, `0x2800`은
+3090·3090 Ti에 적용되지 않으며, 12GB 3080과 다른 GA102 변형은 허용하지 않습니다.
+이는 소스 수준 허용이며 고정 프로필이 아닙니다. 이 소스트리에는 3080 상수가
+커밋되어 있지 않고 유지관리자가 3080 빌드를 실행한 기록도 없습니다.
+
+공개 기록 두 건이 RTX 3080 10GB 트랜잭션을 설명합니다. 프로젝트 기원
+[MSI 3080 보고](https://github.com/rough2515-hub/rtx3080-unlock-public/blob/a08254d269af30ace9e57237abd3d8e6c261e8f5/evidence/unlock-boot-09/REPORT.TXT)는
+`220610de` / `1462:3890`, chip `b72000a1`, `0x2800` MiB, nvgop `6000a`,
+SS0 `0x88888888`, SS1 `0x8`, FLR과 clean containment를 기록합니다.
+[PR #72](https://github.com/impacifist/Windows-GPU-UNLOCK/pull/72)는
+Maxsun B760M / RTX 3080 LHR(`221610de`, subsystem `7377:2000`)의 cold boot 1회를
+보고하고 `proven.json`에 추가된 nvgop `6000a` `.text` 해시를 제공합니다.
+PR #72의 고정 `b760m-3080lhr` 프로필과 B760M aggregate-console 예외는 이
+소스트리에 포함하지 않았습니다. 두 기록 모두 현재 소스의 3080 실행이 아니며,
+한 번의 부팅은 장기·반복 안정성 근거가 아닙니다.
+
+3080 캡처에는 정확한 subsystem·PROM·PCI segment/bus·root·화면 경로·드라이버
+해시·콘솔 소유권 그래프가 필요합니다. 생성기가 nvgop 해시나 소유권 모델을
+거부하면 `proven.json`을 넓히거나 생성 헤더를 직접 고치지 말고, 전체 캡처를
+보존해 보고하세요. [RTX 3080 안내](RTX3080-10GB.ko.md)와
+[로컬 프로필 절차](NEW-MACHINE.en.md)를 참고하세요.
+
 ## 기록된 구성 밖의 범위
 
 | 다른 구성·검증 범위 | 상태 |

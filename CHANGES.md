@@ -1,5 +1,20 @@
 # Changes
 
+## Unreleased — RTX 3080 10GB source admission for local profiles
+
+- Admit `10de:2206` and `10de:2216` GA102 cards at exactly `0x2800` MiB (10 GiB)
+  to the generated LOCAL workflow. Keep 3090 / 3090 Ti at `0x6000` / `0x5ff4`;
+  reject cross-combinations, 12GB variants and other chip revisions.
+- Extend the generic probe, probe regression list, decode-sync and synthetic
+  admission matrices to both 3080 IDs. No fixed `b760m-3080lhr` profile or
+  B760M-specific aggregate-console allowance is imported.
+- Add the nvgop `6000a` `.text` hash from the hardware-verified upstream PR #72
+  to `proven.json`. The project-origin MSI 3080 report records the same nvgop
+  version. This is source-level admission with no maintainer 3080 run; one
+  upstream cold boot is not long-term or general 3080 support.
+- Add EN/KO RTX 3080 notes and update the GPU support, family, compatibility and
+  new-machine docs.
+
 ## Unreleased — connect reviewed RTX 3060 families to local capture and replay
 
 - Add bounded generic read-only capture for the exact `248710de` and `250410de`

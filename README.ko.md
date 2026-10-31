@@ -4,6 +4,11 @@
 
 커뮤니티 기여로 확장하는 실험용 UEFI GPU 언락과 Windows 직접 인계 구현입니다.
 
+> **포크 안내.** 이 저장소는
+> [impacifist/Windows-GPU-UNLOCK](https://github.com/impacifist/Windows-GPU-UNLOCK)의
+> 포크로, RTX 3080 10GB를 LOCAL 워크플로에 소스 수준으로 허용합니다. 상위
+> 릴리스가 아니며 [RTX 3080 안내](docs/RTX3080-10GB.ko.md)를 참고하세요.
+
 [![Discord 커뮤니티 참여](https://img.shields.io/badge/Join%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/WjKsjEqxF)
 [![지원 구성과 호환성 확인](https://img.shields.io/badge/Compatibility-455A64?style=for-the-badge)](docs/COMPATIBILITY.ko.md)
 [![연구와 개선에 기여하기](https://img.shields.io/badge/Contribute-37474F?style=for-the-badge&logo=github&logoColor=white)](docs/CONTRIBUTING.ko.md)
@@ -26,7 +31,7 @@ PR에 남겨주세요. [커뮤니티 룰 — English](docs/DISCORD-RULES.en.md)�
 | **RTX 3060 12GB (GA104 / GA106)** | 실기기 성공 보고 · headless USB 전용 | [GA104](docs/COMPATIBILITY.ko.md#프로필-4-asus-prime-b660-plus-d4--rtx-3060-12gbheadless-usb) · [GA106](docs/COMPATIBILITY.ko.md#프로필-5-gigabyte-h610m-h--rtx-3060-12gb-ga106headless-usb) |
 | **RTX 3070 8GB (2484 / GA104)** | 기여자 로컬 USB 성공 보고 · 실험적 자동 프로필 | [정확한 조건](docs/COMPATIBILITY.ko.md#로컬-프로필-성공-보고) |
 | **RTX 3070 Ti 8GB** | 실기기 성공 보고 · 내부 headless | [지원 구성](docs/COMPATIBILITY.ko.md#프로필-2-asus-tuf-b660m-e-d4--rtx-3070-tiaggregate-console) |
-| **RTX 3080** | 전용 프로필 없음 · Windows 화면 연결 연구 자료 제공 | [연구 관측](research/rtx3080/README.md) · [프로젝트 출처](THIRD_PARTY_NOTICES.md) |
+| **RTX 3080 10GB (GA102)** | 장비별 LOCAL 프로필 소스 허용 · 고정 프로필·유지관리자 실기 시험 없음 | [RTX 3080 안내](docs/RTX3080-10GB.ko.md) · [연구 관측](research/rtx3080/README.md) |
 | **RTX 3090 FE 24GB** | 실기기 성공 기록 · 내부 headless · 기본 프로필 | [지원 구성](docs/COMPATIBILITY.ko.md#프로필-1-asus-tuf-b650m--rtx-3090-fe최초-검증) |
 | **RTX 3090 Ti 24GB** | 실기기 성공 보고 · 정확한 장비별 경로 확인 | [X870 USB](docs/COMPATIBILITY.ko.md#프로필-3-gigabyte-x870-aorus-elite-wifi7--rtx-3090-tiheadless-usb) · [B660M 내부](docs/COMPATIBILITY.ko.md#프로필-6-asus-tuf-b660m-e-d4--colorful-rtx-3090-ti내부) |
 
